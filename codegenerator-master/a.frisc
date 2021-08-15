@@ -1,0 +1,42 @@
+	MOVE	40000, R7
+	CALL	F_MAIN
+	ADD	R7, %D 0, R7
+	HALT	
+F_C		
+	LOAD	R6, (R7+4)
+	RET	
+F_B		
+	LOAD	R6, (R7+4)
+	CALL	F_C
+	ADD	R7, %D 0, R7
+	MOVE	R6, (B_z)
+	PUSH	R0
+	ADD	R6, R5, R6
+	ADD	R6, R5, R6
+	RET	
+F_A		
+	LOAD	R6, (R7+4)
+	CALL	F_B
+	ADD	R7, %D 4, R7
+	MOVE	R6, (A_y)
+	PUSH	R0
+	ADD	R6, R5, R6
+	ADD	R6, R5, R6
+	RET	
+F_F		
+	LOAD	R6, (R7+4)
+mov	MOVE	, R0
+	CALL	F_A
+	ADD	R7, %D 4, R7
+	MOVE	R6, (F_x)
+	PUSH	R0
+	ADD	R6, R5, R6
+	ADD	R6, R5, R6
+	RET	
+F_MAIN		
+	MOVE	%D 1, R0
+	PUSH	R0
+	CALL	F_F
+	ADD	R7, %D 8, R7
+	MOVE	R6, R4
+	RET	
